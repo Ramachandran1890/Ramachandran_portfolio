@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramachandran R | WordPress Developer & UI/UX Designer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              violet: '#8b5cf6',
+              cyan: '#06b6d4',
+              dark: '#0b0f17',
+              darker: '#06090e',
+              card: '#131926',
+              border: '#1f293d'
+            }
+          },
+          animation: {
+            'blob': 'blob 8s infinite',
+            'pulse-subtle': 'pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -40px) scale(1.08)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '.6' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Glassmorphism styling */
+    .glass-card {
+      background: rgba(19, 25, 38, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 16px 32px -8px rgba(16, 185, 129, 0.12);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f293d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+  </style>
+</head>
+
+<body class="bg-brand-darker text-slate-200 font-sans selection:bg-brand-500 selection:text-white antialiased overflow-x-hidden relative">
+
+  <!-- Background decorative ambient glow -->
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-500/15 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-brand-violet/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+  </div>
+
+  <!-- Toast Notification Container for Copied info -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-brand-card border border-brand-500/40 text-white px-5 py-3 rounded-xl shadow-2xl">
+    <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center">
+      <i class="fa-solid fa-check text-sm"></i>
+    </div>
+    <span id="toastMessage" class="text-sm font-medium">Copied to clipboard!</span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="fixed top-0 left-0 w-full z-40 bg-brand-darker/80 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo / Name -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-cyan flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
+          R
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors">Ramachandran R</span>
+          <span class="block text-xs text-slate-400 font-mono">WordPress &amp; UI/UX</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+        <a href="#about" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors">About</a>
+        <a href="#divi-feature" class="px-3 py-2 rounded-lg text-brand-400 hover:text-brand-300 hover:bg-brand-500/10 transition-colors flex items-center gap-1.5 font-semibold">
+          <i class="fa-solid fa-layer-group text-xs"></i> Divi Specialization
+        </a>
+        <a href="#skills" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Skills Matrix</a>
+        <a href="#projects" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Live Projects</a>
+        <a href="#experience" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Experience</a>
+        <a href="#education" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Education</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="#contact" class="px-4 py-2 text-sm rounded-xl bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-semibold transition-all shadow-md shadow-brand-500/20 hover:shadow-brand-500/40">
+          <i class="fa-solid fa-paper-plane mr-1.5 text-xs"></i> Hire Me
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 focus:outline-none" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="md:hidden hidden px-4 pt-2 pb-6 bg-brand-dark/95 border-b border-brand-border space-y-1">
+      <a href="#about" class="block px-3 py-2.5 rounded-lg text-slate-200 hover:bg-white/5 text-base">About Me</a>
+      <a href="#divi-feature" class="block px-3 py-2.5 rounded-lg text-brand-400 font-semibold hover:bg-brand-500/10 text-base">Divi Builder (2+ Yrs)</a>
+      <a href="#skills" class="block px-3 py-2.5 rounded-lg text-slate-200 hover:bg-white/5 text-base">Skills Matrix</a>
+      <a href="#projects" class="block px-3 py-2.5 rounded-lg text-slate-200 hover:bg-white/5 text-base">Live Projects</a>
+      <a href="#experience" class="block px-3 py-2.5 rounded-lg text-slate-200 hover:bg-white/5 text-base">Work Experience</a>
+      <a href="#education" class="block px-3 py-2.5 rounded-lg text-slate-200 hover:bg-white/5 text-base">Education</a>
+      <a href="#contact" class="block text-center mt-3 py-2.5 rounded-lg bg-brand-500 text-white font-semibold shadow">Get In Touch</a>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-24 sm:pt-28">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Intro Column -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs sm:text-sm font-medium">
+              <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+              Available for Global Projects &amp; Full-Time Roles
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-emerald-300 to-brand-cyan">Ramachandran R</span>
+            </h1>
+
+            <p class="text-xl sm:text-2xl text-slate-300 font-medium">
+              WordPress Developer &amp; UI/UX Designer
+            </p>
+
+            <p class="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
+              Crafting high-speed, scalable corporate portals and high-converting online experiences. Specializing in 
+              <span class="text-brand-400 font-semibold underline decoration-brand-500/50 underline-offset-4">Divi Builder (2+ Years)</span>, 
+              Elementor, Colibri, and modern responsive front-end architectures with performance gains up to 35%.
+            </p>
+
+            <!-- Quick Badges / Contact Pill Bars -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1 text-xs sm:text-sm text-slate-300">
+              <div class="flex items-center gap-2 bg-brand-card/90 px-3.5 py-2 rounded-xl border border-brand-border">
+                <i class="fa-solid fa-location-dot text-brand-400"></i>
+                <span>Chennai, Tamil Nadu</span>
+              </div>
+              <button onclick="copyToClipboard('+919047975984', 'Phone number copied!')" class="flex items-center gap-2 bg-brand-card/90 hover:bg-brand-500/10 hover:border-brand-500/40 px-3.5 py-2 rounded-xl border border-brand-border transition-colors group cursor-pointer" title="Click to copy phone">
+                <i class="fa-solid fa-phone text-brand-400"></i>
+                <span>+91 9047975984</span>
+                <i class="fa-regular fa-clone text-xs text-slate-500 group-hover:text-brand-400"></i>
+              </button>
+              <button onclick="copyToClipboard('ramachandran180890@gmail.com', 'Email copied!')" class="flex items-center gap-2 bg-brand-card/90 hover:bg-brand-500/10 hover:border-brand-500/40 px-3.5 py-2 rounded-xl border border-brand-border transition-colors group cursor-pointer" title="Click to copy email">
+                <i class="fa-solid fa-envelope text-brand-400"></i>
+                <span>ramachandran180890@gmail.com</span>
+                <i class="fa-regular fa-clone text-xs text-slate-500 group-hover:text-brand-400"></i>
+              </button>
+            </div>
+
+            <!-- Call To Actions -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-3">
+              <a href="#contact" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-bold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center gap-2 text-base">
+                <span>Start a Project</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </a>
+
+              <a href="#projects" class="px-6 py-3.5 rounded-xl bg-brand-card hover:bg-slate-800/80 border border-brand-border hover:border-slate-600 text-slate-200 font-medium transition-all flex items-center gap-2 text-base">
+                <i class="fa-solid fa-desktop text-brand-400"></i>
+                <span>View Live Work</span>
+              </a>
+
+              <a href="https://linkedin.com/in/ramachandran-raju-935b80176/" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-brand-card hover:bg-blue-600/20 border border-brand-border hover:border-blue-500/40 text-blue-400 transition-all" title="LinkedIn Profile">
+                <i class="fa-brands fa-linkedin-in text-lg"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Right Showcase Card / Metrics -->
+          <div class="lg:col-span-5">
+            <div class="relative mx-auto max-w-md">
+              <!-- Glow back -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-brand-500/20 to-brand-cyan/20 rounded-3xl blur-xl"></div>
+              
+              <div class="relative glass-card rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-6">
+                <!-- Profile Header in Card -->
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-500 to-brand-cyan flex items-center justify-center text-white text-2xl font-bold shadow-md shadow-brand-500/30">
+                    <i class="fa-solid fa-code"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white">Ramachandran R</h3>
+                    <p class="text-xs text-slate-400 font-mono">B.E. Electronics &amp; Comm.</p>
+                    <div class="flex items-center gap-1.5 text-xs text-brand-400 mt-1 font-semibold">
+                      <i class="fa-solid fa-circle-check"></i> Verified Technical Specialist
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Highlight Box: Divi Experience -->
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-900/30 to-brand-card border border-purple-500/30 flex items-center justify-between">
+                  <div class="space-y-0.5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold">Featured CMS Stack</span>
+                    <div class="text-base font-bold text-white flex items-center gap-2">
+                      <i class="fa-solid fa-cube text-purple-400"></i> Divi Builder
+                    </div>
+                  </div>
+                  <span class="px-3 py-1 text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 rounded-full">
+                    2+ Years Exp
+                  </span>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-brand-carder/80 bg-slate-900/60 p-4 rounded-xl border border-brand-border">
+                    <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-300">+35%</div>
+                    <div class="text-xs text-slate-400 mt-1">PageSpeed &amp; Performance Boost</div>
+                  </div>
+                  <div class="bg-slate-900/60 p-4 rounded-xl border border-brand-border">
+                    <div class="text-3xl font-extrabold text-brand-cyan">5+</div>
+                    <div class="text-xs text-slate-400 mt-1">International Live Corporate Portals</div>
+                  </div>
+                  <div class="bg-slate-900/60 p-4 rounded-xl border border-brand-border">
+                    <div class="text-3xl font-extrabold text-purple-400">100%</div>
+                    <div class="text-xs text-slate-400 mt-1">Responsive &amp; Cross-Browser</div>
+                  </div>
+                  <div class="bg-slate-900/60 p-4 rounded-xl border border-brand-border">
+                    <div class="text-3xl font-extrabold text-amber-400">PSD &rarr; Web</div>
+                    <div class="text-xs text-slate-400 mt-1">Pixel-Perfect Conversion</div>
+                  </div>
+                </div>
+
+                <!-- Quick Tech Tags -->
+                <div class="pt-2 border-t border-brand-border/60">
+                  <span class="text-xs text-slate-400 uppercase tracking-wider font-mono block mb-2">Core Tech Stack</span>
+                  <div class="flex flex-wrap gap-1.5 text-xs">
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">WordPress</span>
+                    <span class="px-2.5 py-1 bg-purple-500/20 rounded-md text-purple-300 border border-purple-500/30 font-semibold">Divi Builder</span>
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">Elementor</span>
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">Colibri</span>
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">WooCommerce</span>
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">HTML5/CSS3</span>
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">Bootstrap</span>
+                    <span class="px-2.5 py-1 bg-white/5 rounded-md text-slate-300 border border-white/5">SQL &amp; C#</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: SPECIALIZED DIVI BUILDER HIGHLIGHT (2+ YEARS) -->
+    <section id="divi-feature" class="py-16 px-4 sm:px-6 lg:px-8 border-y border-brand-border/50 bg-gradient-to-b from-brand-dark/40 to-brand-darker">
+      <div class="max-w-6xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 sm:p-10 border border-purple-500/20 relative overflow-hidden">
+          <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl"></div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div class="lg:col-span-8 space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 text-xs font-semibold uppercase tracking-wider">
+                <i class="fa-solid fa-award"></i> Dedicated Experience Highlight
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+                Divi Builder Expertise &bull; <span class="text-purple-400">2+ Years</span> of Custom Theme &amp; Layout Engineering
+              </h2>
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Extensive hands-on proficiency with the Divi Theme Builder, Elegant Themes framework, and custom module styling. From creating high-converting sales funnels and global header/footer templates to building custom responsive layouts with tailored CSS/JS overrides, I make Divi sites lightning-fast, modular, and easy for client teams to maintain.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/20">
+                  <i class="fa-solid fa-shapes text-purple-400 text-lg mb-1.5 block"></i>
+                  <h4 class="text-white text-sm font-semibold">Theme Builder &amp; Dynamic Layouts</h4>
+                  <p class="text-xs text-slate-400 mt-1">Deep mastery of global presets, condition templates, and dynamic post loops.</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/20">
+                  <i class="fa-solid fa-gauge-high text-brand-400 text-lg mb-1.5 block"></i>
+                  <h4 class="text-white text-sm font-semibold">Divi Performance Optimization</h4>
+                  <p class="text-xs text-slate-400 mt-1">Minimizing DOM depth, critical CSS rendering, dynamic asset caching for 90+ PageSpeed.</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/20">
+                  <i class="fa-solid fa-code-fork text-cyan-400 text-lg mb-1.5 block"></i>
+                  <h4 class="text-white text-sm font-semibold">PSD/Figma to Divi</h4>
+                  <p class="text-xs text-slate-400 mt-1">Pixel-accurate translation from Adobe Photoshop/design files directly into modular Divi rows.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Divi Quick Badge Box -->
+            <div class="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-slate-900/80 border border-brand-border text-center">
+              <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-xl shadow-purple-600/30 mb-3">
+                <i class="fa-solid fa-cubes"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white">Divi Certified Practitioner</h3>
+              <p class="text-xs text-purple-300 font-mono mt-1">2+ Years Production Experience</p>
+              <div class="mt-4 pt-4 border-t border-slate-800 w-full space-y-2 text-xs text-left text-slate-300">
+                <div class="flex items-center justify-between">
+                  <span>Layout Customization</span>
+                  <span class="text-brand-400 font-bold">95%</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-purple-500 h-full rounded-full" style="width: 95%"></div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Child Themes &amp; Custom CSS</span>
+                  <span class="text-brand-400 font-bold">90%</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-brand-500 h-full rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: ABOUT & CAREER OBJECTIVE -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs font-mono font-semibold text-brand-400 uppercase tracking-widest">Background</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Career Profile &amp; Value Proposition</h2>
+          <div class="w-16 h-1 bg-brand-500 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-card glass-card-hover rounded-2xl p-6 border border-brand-border">
+            <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-brands fa-wordpress"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">WordPress &amp; Builders</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">
+              Proven proficiency designing, structuring, and optimizing websites with Divi Builder (2+ Years), Elementor, Colibri, and WooCommerce with dynamic query loops and custom hooks.
+            </p>
+          </div>
+
+          <div class="glass-card glass-card-hover rounded-2xl p-6 border border-brand-border">
+            <div class="w-12 h-12 rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Front-End Engineering</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">
+              Solid grounding in semantic HTML5, CSS3, modern ES6 JavaScript, jQuery, and Bootstrap to deliver fluid layouts, micro-animations, and fast loading speeds across all device viewpoints.
+            </p>
+          </div>
+
+          <div class="glass-card glass-card-hover rounded-2xl p-6 border border-brand-border">
+            <div class="w-12 h-12 rounded-xl bg-brand-violet/20 text-purple-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Data &amp; Design Acumen</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">
+              Equipped with SQL database querying, C# backend basics, and Adobe Photoshop CS6 for exact PSD-to-HTML conversion, brand typography, and business reporting automation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Languages & Traits Strip -->
+        <div class="mt-8 glass-card rounded-2xl p-6 border border-brand-border flex flex-wrap items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-brand-400">
+              <i class="fa-solid fa-language text-lg"></i>
+            </div>
+            <div>
+              <span class="text-xs font-mono text-slate-400 uppercase">Languages Spoken</span>
+              <p class="text-sm font-semibold text-white">English &bull; Tamil &bull; Malay</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-brand-cyan">
+              <i class="fa-solid fa-lightbulb text-lg"></i>
+            </div>
+            <div>
+              <span class="text-xs font-mono text-slate-400 uppercase">Key Strengths</span>
+              <p class="text-sm font-semibold text-white">Problem Solving &bull; Detail-Oriented &bull; Agile Learner</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-purple-400">
+              <i class="fa-solid fa-bullseye text-lg"></i>
+            </div>
+            <div>
+              <span class="text-xs font-mono text-slate-400 uppercase">Core Focus</span>
+              <p class="text-sm font-semibold text-white">35%+ Speed Up &bull; Scalable Corporate Portals</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TECHNICAL SKILLS MATRIX -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-brand-card/30 border-y border-brand-border">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs font-mono font-semibold text-brand-400 uppercase tracking-widest">Capabilities</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Technical Skills Matrix</h2>
+          <p class="text-slate-400 text-sm mt-3">Comprehensive breakdown of toolkits, frameworks, and CMS ecosystems.</p>
+          <div class="w-16 h-1 bg-brand-500 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Col 1: CMS Ecosystem -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-bold uppercase text-brand-400 tracking-wider">CMS Ecosystem</span>
+                <i class="fa-brands fa-wordpress text-2xl text-brand-400"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-4">WordPress Core</h3>
+              <ul class="space-y-3 text-sm text-slate-300">
+                <li class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30">
+                  <div class="flex items-center justify-between font-bold text-purple-300 text-xs">
+                    <span><i class="fa-solid fa-star text-amber-400 mr-1"></i> Divi Builder</span>
+                    <span class="bg-purple-500/30 px-2 py-0.5 rounded">2+ Years</span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-1">Modules, responsive presets &amp; global theme builder</p>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                  <span><strong>Elementor / Pro:</strong> Custom widgets &amp; templates</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                  <span><strong>Colibri Builder:</strong> Corporate site architecture</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                  <span><strong>WooCommerce:</strong> Payment gateways, product catalogues</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border text-xs text-slate-400">
+              Speciality: High performance caching &amp; multi-page corporate sites
+            </div>
+          </div>
+
+          <!-- Col 2: Front-End Tech -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-bold uppercase text-brand-cyan tracking-wider">Interface Dev</span>
+                <i class="fa-brands fa-html5 text-2xl text-brand-cyan"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-4">Front-End Tech</h3>
+              <ul class="space-y-3 text-sm text-slate-300">
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-cyan mt-1 text-xs"></i>
+                  <span><strong>HTML5 &amp; CSS3:</strong> Semantic tags, flexbox &amp; grid</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-cyan mt-1 text-xs"></i>
+                  <span><strong>JavaScript (ES6):</strong> DOM scripting, modern syntax</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-cyan mt-1 text-xs"></i>
+                  <span><strong>jQuery:</strong> Dynamic animations &amp; AJAX interaction</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-cyan mt-1 text-xs"></i>
+                  <span><strong>Bootstrap 4/5:</strong> Mobile-first UI architecture</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-brand-cyan mt-1 text-xs"></i>
+                  <span><strong>Responsive Design:</strong> Fluid breakpoints &amp; cross-device</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border text-xs text-slate-400">
+              Speciality: Zero horizontal overflow &amp; fast interactive elements
+            </div>
+          </div>
+
+          <!-- Col 3: Database & Programming -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-bold uppercase text-emerald-400 tracking-wider">Backend &amp; DB</span>
+                <i class="fa-solid fa-server text-2xl text-emerald-400"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-4">Programming &amp; SQL</h3>
+              <ul class="space-y-3 text-sm text-slate-300">
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                  <span><strong>SQL:</strong> Relational schema design, queries &amp; reporting</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                  <span><strong>Database Reporting:</strong> Data extraction &amp; audit tracking</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                  <span><strong>C# (Basic):</strong> OOP fundamentals &amp; application logic</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                  <span><strong>XML:</strong> Data structuring &amp; feed exchanges</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border text-xs text-slate-400">
+              Speciality: Clean data retrieval &amp; enterprise backend workflow sync
+            </div>
+          </div>
+
+          <!-- Col 4: Design & UI/UX Tools -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-bold uppercase text-purple-400 tracking-wider">Design &amp; UI/UX</span>
+                <i class="fa-solid fa-bezier-curve text-2xl text-purple-400"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-4">Design Systems</h3>
+              <ul class="space-y-3 text-sm text-slate-300">
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-purple-400 mt-1 text-xs"></i>
+                  <span><strong>Adobe Photoshop CS6:</strong> Asset slicing &amp; layout mockups</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-purple-400 mt-1 text-xs"></i>
+                  <span><strong>PSD to HTML/Divi:</strong> 1:1 pixel precision conversion</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-purple-400 mt-1 text-xs"></i>
+                  <span><strong>Dreamweaver:</strong> Markup validation &amp; code editing</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-purple-400 mt-1 text-xs"></i>
+                  <span><strong>Brand Identity:</strong> Logos, business cards &amp; graphics</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border text-xs text-slate-400">
+              Speciality: User-first visual hierarchy and clear call-to-actions
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURED LIVE PROJECTS -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-mono font-semibold text-brand-400 uppercase tracking-widest">Portfolio</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Live Production Projects</h2>
+          <p class="text-slate-400 text-sm mt-3">Real-world commercial websites built and optimized for international clients.</p>
+          <div class="w-16 h-1 bg-brand-500 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <!-- Project Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-10" id="projectFilter">
+          <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-500 text-white shadow-md shadow-brand-500/20 transition-all">All Projects</button>
+          <button onclick="filterProjects('corporate')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-card hover:bg-slate-800 text-slate-300 border border-brand-border transition-all">Corporate &amp; Automation</button>
+          <button onclick="filterProjects('travel')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-card hover:bg-slate-800 text-slate-300 border border-brand-border transition-all">Travel &amp; Portals</button>
+          <button onclick="filterProjects('ecommerce')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-card hover:bg-slate-800 text-slate-300 border border-brand-border transition-all">E-Commerce &amp; Retail</button>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
+
+          <!-- Project 1: CEMA Ltd -->
+          <div class="project-item corporate glass-card glass-card-hover rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-brand-500/20 text-brand-400 border border-brand-500/30">UK Enterprise</span>
+                <span class="text-xs text-slate-400 font-mono">2022 - Present</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">CEMA Ltd (UK)</h3>
+              <p class="text-xs text-brand-400 font-mono mb-3">cemaltd.co.uk</p>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                End-to-end web architecture for a leading UK electrical and instrumentation engineering specialist. Delivered 35% performance enhancement through caching, clean assets, and responsive module layouts.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6 text-xs font-mono">
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">WordPress</span>
+                <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Colibri &amp; Divi</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Speed Optimization</span>
+              </div>
+            </div>
+            <a href="https://cemaltd.co.uk" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-brand-500/10 hover:bg-brand-500/20 text-brand-400 hover:text-white border border-brand-500/30 font-semibold text-center text-sm transition-all flex items-center justify-center gap-2">
+              <span>Visit Live Portal</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Project 2: CEMA Group -->
+          <div class="project-item corporate glass-card glass-card-hover rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30">UK Enterprise</span>
+                <span class="text-xs text-slate-400 font-mono">2022 - Present</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">CEMA Group (UK)</h3>
+              <p class="text-xs text-brand-cyan font-mono mb-3">cemagroup.co.uk</p>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Corporate conglomerate web hub unifying electrical, mechanical, and civil engineering divisions. Implemented responsive navigation architectures, modern branding, and cross-browser resilience.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6 text-xs font-mono">
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">WordPress</span>
+                <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Divi Standards</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Responsive UI</span>
+              </div>
+            </div>
+            <a href="https://cemagroup.co.uk" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-brand-cyan/10 hover:bg-brand-cyan/20 text-brand-cyan hover:text-white border border-brand-cyan/30 font-semibold text-center text-sm transition-all flex items-center justify-center gap-2">
+              <span>Visit Live Portal</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Project 3: Global Wings -->
+          <div class="project-item travel glass-card glass-card-hover rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-brand-violet/20 text-purple-300 border border-brand-violet/30">B2B/B2C Travel</span>
+                <span class="text-xs text-slate-400 font-mono">Provab Technosoft</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Global Wings</h3>
+              <p class="text-xs text-purple-300 font-mono mb-3">globalwings.in</p>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Engineered high-fidelity interface templates and interactive dashboard components for travel search engines, flight bookings, and hotel inventory integration using Bootstrap and custom HTML/CSS.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6 text-xs font-mono">
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">PSD to HTML</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Bootstrap</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">JavaScript / jQuery</span>
+              </div>
+            </div>
+            <a href="https://globalwings.in" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 hover:text-white border border-purple-500/30 font-semibold text-center text-sm transition-all flex items-center justify-center gap-2">
+              <span>Visit Travel Portal</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Project 4: Counseling Tools -->
+          <div class="project-item corporate glass-card glass-card-hover rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">Healthcare / Tools</span>
+                <span class="text-xs text-slate-400 font-mono">Spiderweb India</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Counseling Tools</h3>
+              <p class="text-xs text-amber-300 font-mono mb-3">counselingtools.com</p>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Crafted complete brand aesthetic, logo design, and seamless web structure to assist mental health counselors and professionals with digital worksheets, guides, and resource indexing.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6 text-xs font-mono">
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Brand Identity</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">UI/UX Layout</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Photoshop CS6</span>
+              </div>
+            </div>
+            <a href="https://counselingtools.com" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 hover:text-white border border-amber-500/30 font-semibold text-center text-sm transition-all flex items-center justify-center gap-2">
+              <span>Visit Live Site</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Project 5: Bollywood Fashion Australia -->
+          <div class="project-item ecommerce glass-card glass-card-hover rounded-2xl p-6 border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-pink-500/20 text-pink-300 border border-pink-500/30">E-Commerce &bull; Australia</span>
+                <span class="text-xs text-slate-400 font-mono">Spiderweb India</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Bollywood Fashion Australia</h3>
+              <p class="text-xs text-pink-300 font-mono mb-3">bollywoodfashion.com.au</p>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                E-commerce retail website built for international customers in Australia. Engineered responsive catalogue displays, shopping cart flows, and cross-browser testing for maximum customer conversions.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6 text-xs font-mono">
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">E-Commerce</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Cross-Browser UI</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Product Styling</span>
+              </div>
+            </div>
+            <a href="https://bollywoodfashion.com.au" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 hover:text-white border border-pink-500/30 font-semibold text-center text-sm transition-all flex items-center justify-center gap-2">
+              <span>Visit Australian Store</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PROFESSIONAL WORK EXPERIENCE TIMELINE -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-brand-card/20 border-t border-brand-border">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono font-semibold text-brand-400 uppercase tracking-widest">Career Progression</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Professional Work Experience</h2>
+          <div class="w-16 h-1 bg-brand-500 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <div class="relative border-l-2 border-brand-border/80 ml-4 sm:ml-32 space-y-12">
+
+          <!-- Role 1: CEMA Automation India -->
+          <div class="relative pl-6 sm:pl-8 group">
+            <!-- Timeline dot -->
+            <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-500 border-4 border-brand-darker group-hover:scale-125 transition-transform shadow-lg shadow-brand-500/50"></div>
+            
+            <!-- Date badge on the left for sm+ screens -->
+            <div class="sm:absolute sm:-left-36 top-0 text-xs font-mono text-brand-400 font-bold mb-1 sm:mb-0">
+              Apr 2022 &ndash; Present
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-7 border border-brand-border group-hover:border-brand-500/40 transition-colors">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold text-white">WordPress Developer</h3>
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-brand-500/10 text-brand-400 border border-brand-500/30">Current Role</span>
+              </div>
+              <h4 class="text-sm font-semibold text-slate-300">CEMA Automation India Pvt. Ltd.</h4>
+              
+              <ul class="mt-4 space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                <li><strong class="text-white">Web Architecture:</strong> Manage end-to-end web architecture for international corporate engineering sites utilizing Colibri and Divi / Elementor builders.</li>
+                <li><strong class="text-white">Performance Optimization:</strong> Enhanced site performance and Google PageSpeed scores by <span class="text-brand-400 font-bold">35%</span> through advanced caching strategies, asset minification, and image optimization pipelines.</li>
+                <li><strong class="text-white">International Portals:</strong> Maintain, update, and secure high-visibility UK live portals: <a href="https://cemaltd.co.uk" target="_blank" class="text-brand-cyan hover:underline">cemaltd.co.uk</a> and <a href="https://cemagroup.co.uk" target="_blank" class="text-brand-cyan hover:underline">cemagroup.co.uk</a>.</li>
+                <li><strong class="text-white">Divi Framework:</strong> Integrated customized theme templates, dynamic sections, and child theme hooks to streamline corporate marketing launches.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 2: Provab Technosoft -->
+          <div class="relative pl-6 sm:pl-8 group">
+            <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-cyan border-4 border-brand-darker group-hover:scale-125 transition-transform shadow-lg shadow-brand-cyan/50"></div>
+            
+            <div class="sm:absolute sm:-left-36 top-0 text-xs font-mono text-slate-400 font-bold mb-1 sm:mb-0">
+              Dec 2019 &ndash; Apr 2022
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-7 border border-brand-border group-hover:border-brand-cyan/40 transition-colors">
+              <h3 class="text-xl font-bold text-white mb-1">Web Designer</h3>
+              <h4 class="text-sm font-semibold text-slate-300">Provab Technosoft Pvt. Ltd.</h4>
+
+              <ul class="mt-4 space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                <li><strong class="text-white">Interface Design:</strong> Developed high-fidelity web templates, dashboards, and booking flows for enterprise B2B and B2C travel booking engines.</li>
+                <li><strong class="text-white">Front-End Translation:</strong> Converted complex, layered PSD designs to responsive, lightweight HTML/Bootstrap codebases.</li>
+                <li><strong class="text-white">Travel Showcase:</strong> Successfully built and deployed client portal <a href="https://globalwings.in" target="_blank" class="text-brand-cyan hover:underline">globalwings.in</a> with cross-device fluidity.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 3: Spiderweb India -->
+          <div class="relative pl-6 sm:pl-8 group">
+            <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-violet border-4 border-brand-darker group-hover:scale-125 transition-transform shadow-lg shadow-brand-violet/50"></div>
+            
+            <div class="sm:absolute sm:-left-36 top-0 text-xs font-mono text-slate-400 font-bold mb-1 sm:mb-0">
+              Mar 2017 &ndash; Sep 2019
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-7 border border-brand-border group-hover:border-purple-500/40 transition-colors">
+              <h3 class="text-xl font-bold text-white mb-1">Web Designer</h3>
+              <h4 class="text-sm font-semibold text-slate-300">Spiderweb India Pvt. Ltd.</h4>
+
+              <ul class="mt-4 space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                <li><strong class="text-white">Visual Design &amp; Branding:</strong> Created comprehensive brand identities, company logos, digital assets, business cards, and website layouts.</li>
+                <li><strong class="text-white">Cross-Browser Compliance:</strong> Guaranteed flawless user experiences across Safari, Chrome, Firefox, and Edge browsers for international e-commerce clients.</li>
+                <li><strong class="text-white">Delivered Deployments:</strong> Spearheaded design and markup for <a href="https://counselingtools.com" target="_blank" class="text-brand-cyan hover:underline">counselingtools.com</a> and <a href="https://bollywoodfashion.com.au" target="_blank" class="text-brand-cyan hover:underline">bollywoodfashion.com.au</a>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 4: Leo Web Tech -->
+          <div class="relative pl-6 sm:pl-8 group">
+            <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-500 border-4 border-brand-darker group-hover:scale-125 transition-transform"></div>
+            
+            <div class="sm:absolute sm:-left-36 top-0 text-xs font-mono text-slate-400 font-bold mb-1 sm:mb-0">
+              Jan 2015 &ndash; Aug 2017
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-7 border border-brand-border">
+              <h3 class="text-xl font-bold text-white mb-1">Process Associate Executive</h3>
+              <h4 class="text-sm font-semibold text-slate-300">Leo Web Tech Pvt. Ltd.</h4>
+
+              <ul class="mt-4 space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                <li><strong class="text-white">Data Management:</strong> Managed educational data collection, taxonomy indexing, and comprehensive reporting pipelines for international overseas clients.</li>
+                <li><strong class="text-white">Operational Accuracy:</strong> Maintained high precision non-voice data validation standards and workflow automations.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EDUCATION & CREDENTIALS -->
+    <section id="education" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs font-mono font-semibold text-brand-400 uppercase tracking-widest">Academic Foundations</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Education &amp; Qualifications</h2>
+          <div class="w-16 h-1 bg-brand-500 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- B.E. Anna University -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-brand-500/5 rounded-bl-full pointer-events-none"></div>
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-brand-500/20 text-brand-400 border border-brand-500/30">Bachelor of Engineering</span>
+              <h3 class="text-lg font-bold text-white mt-3">Electronics &amp; Communication</h3>
+              <p class="text-sm text-slate-300 mt-1 font-medium">Anna University</p>
+              <p class="text-xs text-slate-400 mt-2">Graduated in 2013</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+              <span class="text-xs text-slate-400">Final Score:</span>
+              <span class="text-base font-bold text-white bg-slate-800/80 px-2.5 py-1 rounded-lg border border-brand-border">71%</span>
+            </div>
+          </div>
+
+          <!-- Diploma ECE -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-brand-cyan/5 rounded-bl-full pointer-events-none"></div>
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-microchip"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30">Technical Diploma</span>
+              <h3 class="text-lg font-bold text-white mt-3">ECE Engineering</h3>
+              <p class="text-sm text-slate-300 mt-1 font-medium">Thirumathi Elizabeth Polytechnic College</p>
+              <p class="text-xs text-slate-400 mt-2">Graduated in 2010</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+              <span class="text-xs text-slate-400">Final Score:</span>
+              <span class="text-base font-bold text-brand-cyan bg-slate-800/80 px-2.5 py-1 rounded-lg border border-brand-border">88% (Distinction)</span>
+            </div>
+          </div>
+
+          <!-- HSC -->
+          <div class="glass-card rounded-2xl p-6 border border-brand-border relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-brand-violet/5 rounded-bl-full pointer-events-none"></div>
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-school"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-purple-500/20 text-purple-400 border border-purple-500/30">Higher Secondary (HSC)</span>
+              <h3 class="text-lg font-bold text-white mt-3">High School Certification</h3>
+              <p class="text-sm text-slate-300 mt-1 font-medium">Govt. Higher Secondary School, Kurumbalur</p>
+              <p class="text-xs text-slate-400 mt-2">Completed in 2007</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+              <span class="text-xs text-slate-400">Curriculum:</span>
+              <span class="text-xs font-semibold text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-brand-border">State Board</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT & HIRE ME -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-brand-card/30 border-t border-brand-border">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs font-mono font-semibold text-brand-400 uppercase tracking-widest">Connect</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Get In Touch &bull; Hire Me</h2>
+          <p class="text-slate-400 text-sm mt-3">Let's discuss your next WordPress portal, Divi customization, or UI/UX redesign.</p>
+          <div class="w-16 h-1 bg-brand-500 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Direct Contact Information -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="glass-card rounded-2xl p-6 border border-brand-border space-y-4">
+              <h3 class="text-lg font-bold text-white">Contact Information</h3>
+              <p class="text-sm text-slate-400">Available for freelance assignments, remote contracts, and full-time opportunities.</p>
+
+              <!-- Email Card -->
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-brand-border hover:border-brand-500/40 transition-colors">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 font-mono block">Email Address</span>
+                    <a href="mailto:ramachandran180890@gmail.com" class="text-sm font-semibold text-white hover:text-brand-400 transition-colors">ramachandran180890@gmail.com</a>
+                  </div>
+                </div>
+                <button onclick="copyToClipboard('ramachandran180890@gmail.com', 'Email copied to clipboard!')" class="p-2 text-slate-400 hover:text-brand-400 transition-colors" title="Copy email">
+                  <i class="fa-regular fa-clone"></i>
+                </button>
+              </div>
+
+              <!-- Phone Card -->
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-brand-border hover:border-brand-500/40 transition-colors">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-brand-cyan/20 text-brand-cyan flex items-center justify-center">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 font-mono block">Direct Phone / WhatsApp</span>
+                    <a href="tel:+919047975984" class="text-sm font-semibold text-white hover:text-brand-cyan transition-colors">+91 9047975984</a>
+                  </div>
+                </div>
+                <button onclick="copyToClipboard('+919047975984', 'Phone copied to clipboard!')" class="p-2 text-slate-400 hover:text-brand-cyan transition-colors" title="Copy phone">
+                  <i class="fa-regular fa-clone"></i>
+                </button>
+              </div>
+
+              <!-- Location Card -->
+              <div class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-900/80 border border-brand-border">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <span class="text-xs text-slate-400 font-mono block">Location</span>
+                  <span class="text-sm font-semibold text-white">Chennai, Tamil Nadu, India</span>
+                </div>
+              </div>
+
+              <!-- LinkedIn Profile Button -->
+              <a href="https://linkedin.com/in/ramachandran-raju-935b80176/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0077b5]/20 hover:bg-[#0077b5]/30 text-[#0077b5] border border-[#0077b5]/40 font-semibold text-sm transition-all">
+                <i class="fa-brands fa-linkedin"></i>
+                <span>Connect on LinkedIn</span>
+              </a>
+            </div>
+
+            <!-- Download Declaration / Formal note -->
+            <div class="p-5 rounded-2xl bg-slate-900/50 border border-brand-border text-xs text-slate-400 space-y-2">
+              <span class="font-bold text-slate-300 uppercase font-mono">Formal Declaration:</span>
+              <p class="italic">"I hereby declare that the information provided above is true and correct to the best of my knowledge and belief." &mdash; Ramachandran R</p>
+            </div>
+          </div>
+
+          <!-- Interactive Message Form -->
+          <div class="lg:col-span-7">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border border-brand-border">
+              <h3 class="text-xl font-bold text-white mb-2">Send a Direct Message</h3>
+              <p class="text-xs text-slate-400 mb-6">Fill in the form to immediately prepare an inquiry or project brief.</p>
+
+              <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1" for="name">Your Name</label>
+                    <input type="text" id="name" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-brand-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1" for="email">Your Email</label>
+                    <input type="email" id="email" required placeholder="john@example.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-brand-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1" for="subject">Project Focus / Requirement</label>
+                  <select id="subject" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-brand-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors">
+                    <option value="Divi Builder Custom Development">Divi Builder Custom Development (2+ Years Experience)</option>
+                    <option value="WordPress Performance & Optimization">WordPress Performance &amp; Caching Optimization</option>
+                    <option value="PSD to Responsive HTML/WordPress">PSD to HTML / WordPress Conversion</option>
+                    <option value="Elementor or Colibri Site Design">Elementor or Colibri Site Architecture</option>
+                    <option value="Full-Time / Freelance Hire">Full-Time / Freelance Job Opportunity</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1" for="message">Project Description / Message</label>
+                  <textarea id="message" rows="4" required placeholder="Share your website goals, timeline, and requirements..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-brand-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-bold text-sm shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                  <span>Launch Email Client</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brand-border/60 bg-brand-darker py-10 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-brand-500 inline-block"></span>
+        <span class="text-slate-300 font-semibold">Ramachandran R</span> &bull; WordPress Developer &amp; UI/UX Designer
+      </div>
+      <div>
+        Divi Builder &bull; Elementor &bull; Colibri &bull; Front-End Architecture &bull; Chennai, TN
+      </div>
+      <div>
+        &copy; 2026. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Mobile navigation toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Close menu when clicking any mobile link
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+
+    // Copy to clipboard helper
+    function copyToClipboard(text, customMessage) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(customMessage || 'Copied to clipboard!');
+      } catch (err) {
+        showToast('Failed to copy');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // Toast notification display
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      if (toast && toastMsg) {
+        toastMsg.textContent = message;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0');
+        }, 2800);
+      }
+    }
+
+    // Project filtering mechanism
+    function filterProjects(category) {
+      const cards = document.querySelectorAll('.project-item');
+      const filterBtns = document.querySelectorAll('#projectFilter .filter-btn');
+
+      // Update button styling
+      filterBtns.forEach(btn => {
+        btn.classList.remove('bg-brand-500', 'text-white', 'shadow-md', 'shadow-brand-500/20');
+        btn.classList.add('bg-brand-card', 'text-slate-300');
+      });
+
+      // Find clicked button
+      if (window.event && window.event.target) {
+        const target = window.event.target.closest('button');
+        if (target) {
+          target.classList.remove('bg-brand-card', 'text-slate-300');
+          target.classList.add('bg-brand-500', 'text-white', 'shadow-md', 'shadow-brand-500/20');
+        }
+      }
+
+      // Filter cards
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Direct mailto handler for contact form
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+      const body = encodeURIComponent(`Hello Ramachandran,\n\nName: ${name}\nEmail: ${email}\n\nProject Scope / Notes:\n${message}\n`);
+      const mailtoUrl = `mailto:ramachandran180890@gmail.com?subject=${encodeURIComponent(subject + ' - ' + name)}&body=${body}`;
+
+      showToast('Opening default mail client...');
+      window.location.href = mailtoUrl;
+    }
+  </script>
+</body>
+</html>
